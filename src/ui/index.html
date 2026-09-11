@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Browser Diagnostics</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Browser Diagnostics</h1>
+      <div id="banner" class="banner" role="status"></div>
+    </header>
+    <nav id="tabs" aria-label="Sections">
+      <button data-section="session" class="active">Session</button>
+      <button data-section="structure">Structure</button>
+      <button data-section="recipe">Recipe</button>
+      <button data-section="observe">Observe</button>
+      <button data-section="export">Export</button>
+    </nav>
+    <main>
+      <section id="section-session" data-section="session"></section>
+      <section id="section-structure" data-section="structure" hidden></section>
+      <section id="section-recipe" data-section="recipe" hidden></section>
+      <section id="section-observe" data-section="observe" hidden></section>
+      <section id="section-export" data-section="export" hidden></section>
+    </main>
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>

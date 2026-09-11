@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "Browser Diagnostics",
+  "version": "0.1.0",
+  "description": "Local-only diagnostic tool for inspecting how a selected web page exposes rendered data. No telemetry, no remote code.",
+  "minimum_chrome_version": "116",
+  "permissions": ["activeTab", "scripting", "storage"],
+  "action": {
+    "default_title": "Open Browser Diagnostics for this tab"
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'none'; connect-src 'none'; img-src 'self'; style-src 'self'; font-src 'self'"
+  }
+}

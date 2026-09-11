@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Fixture: Synthetic Messenger</title>
+  <style>
+    body { font: 14px system-ui, sans-serif; margin: 0; display: grid; grid-template-columns: 240px 1fr; height: 100vh; }
+    nav { border-right: 1px solid #ccc; padding: 8px; }
+    main { display: flex; flex-direction: column; }
+    #log { flex: 1; overflow: auto; padding: 8px; }
+    .msg { display: grid; grid-template-columns: 90px 1fr 120px; gap: 8px; padding: 6px; border-bottom: 1px solid #eee; }
+    .msg .body { white-space: pre-wrap; }
+    .msg.hidden-msg { display: none; }
+    .clamp { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 120px; }
+    #composer { border-top: 1px solid #ccc; padding: 8px; }
+    #draft { border: 1px solid #aaa; min-height: 2em; padding: 4px; }
+    #controls { padding: 8px; background: #f6f6f6; border-top: 1px solid #ccc; display: flex; flex-wrap: wrap; gap: 4px; }
+  </style>
+</head>
+<body>
+  <nav aria-label="Conversations">
+    <ul id="conversations" role="list">
+      <li role="listitem"><a href="#/c/alpha" data-conv="alpha">Alpha (identical text)</a></li>
+      <li role="listitem"><a href="#/c/beta" data-conv="beta">Beta (identical text)</a></li>
+      <li role="listitem"><a href="#/c/virtual" data-conv="virtual">Virtualized (node reuse)</a></li>
+      <li role="listitem"><a href="#/c/noids" data-conv="noids">No IDs</a></li>
+    </ul>
+    <p>Account: <span id="account" data-account-id="acct-1">user-one</span></p>
+    <form onsubmit="return false">
+      <label>Password <input type="password" id="pw" value="s3cret-password-value" /></label>
+      <label>Token <input type="text" id="tok" value="tok-abc-123" data-secret="tok-abc-123" /></label>
+    </form>
+  </nav>
+  <main>
+    <section id="log" role="log" aria-label="Messages" data-testid="message-log" data-conversation-id="alpha"></section>
+    <div id="composer">
+      <div id="draft" contenteditable="true" data-placeholder="Write…">unsent draft text — must never be extracted</div>
+    </div>
+    <div id="shadow-host"></div>
+    <iframe id="frame" title="inaccessible frame" srcdoc="<p data-record-id='in-frame'>frame content</p>" width="1" height="1"></iframe>
+    <div id="controls">
+      <button id="btn-incoming">Add incoming</button>
+      <button id="btn-edit">Edit last</button>
+      <button id="btn-remove">Remove first</button>
+      <button id="btn-older">Load older</button>
+      <button id="btn-replace-root">Replace root</button>
+      <button id="btn-storm">Mutation storm</button>
+      <button id="btn-oversized">Add oversized</button>
+      <button id="btn-switch-account">Switch account</button>
+      <button id="btn-push">pushState navigate</button>
+      <span id="side-effects" data-read-receipts="0">read receipts sent: 0</span>
+    </div>
+  </main>
+  <script src="./app.js"></script>
+</body>
+</html>

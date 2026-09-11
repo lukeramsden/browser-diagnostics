@@ -1,0 +1,34 @@
+{
+  "name": "browser-diagnostics",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Local-only Chrome MV3 diagnostic extension for inspecting how web applications expose rendered data.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lukeramsden/browser-diagnostics.git"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "type": "module",
+  "scripts": {
+    "build": "rm -rf dist && vite build && vite build -c vite.agent.config.ts && node scripts/finalize-dist.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:e2e": "npm run build:test && playwright test",
+    "check": "npm run typecheck && npm test && npm run test:e2e",
+    "build:test": "rm -rf dist-test && vite build --mode test && vite build -c vite.agent.config.ts --mode test && node scripts/finalize-dist.mjs test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "@types/chrome": "^0.2.9",
+    "@types/node": "22.20.2",
+    "jsdom": "^30.0.1",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.0",
+    "vitest": "^5.0.0",
+    "zod": "^4.6.2"
+  }
+}
